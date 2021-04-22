@@ -1,0 +1,13 @@
+
+Operating System : Linux
+Machine : x86_64
+Processor :  x86_64
+Release : 5.4.0-72-generic
+Version : #80~18.04.1-Ubuntu SMP Mon Apr 12 23:26:25 UTC 2021
+Hostname : subhomoy-HP-Notebook
+IP Address : 127.0.1.1
+FQDN : maa03s28-in-f4.1e100.net
+Public IP address : 223.223.143.221
+Private IP Address : 192.168.0.108
+
+        

