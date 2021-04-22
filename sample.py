@@ -26,9 +26,6 @@ def info():
     ip_address = socket.gethostbyname(hostname)  # returns IPv4 address with respect to hostname
     
     ip = get('https://api.ipify.org').text
-
-    os_name = 'Operating System : '+str(system_data.system)
-
     
     with open("info.txt","w") as f :
         output = f'''
